@@ -17,13 +17,14 @@ public class App
 
         ){
             // StringBuilder emp = new StringBuilder();
-            String jobString, fName, lName;
+            String jobString, fName, lName = null;
             int id, manId;
             System.out.println("Enter your id: ");
             id = Integer.parseInt(br.readLine());
             System.out.println("Enter your name: ");
             Scanner scan = new Scanner(br.readLine());
             fName = scan.next();
+            if(scan.hasNext())
             lName = scan.next();
             // emp.append(br.readLine());
             System.out.println("Enter your job title: ");
