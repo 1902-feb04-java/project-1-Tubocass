@@ -62,11 +62,11 @@ public class Reimbursement
 	{
 		return image;
 	}
-	public void setImage(byte[] image)
+	public void setImage(byte[] data)
 	{
-		this.image = image;
+		this.image = data;
+		
 	}
-	
 	
 
 }

@@ -10,8 +10,18 @@
   	<description></description>
   	<servlet-class>create_request</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>request_create</servlet-name>
+  	<display-name>request_create</display-name>
+  	<description></description>
+  	<servlet-class>request_create</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>create_request</servlet-name>
   	<url-pattern>/create_request</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>request_create</servlet-name>
+  	<url-pattern>/request_create</url-pattern>
   </servlet-mapping>
 </web-app>

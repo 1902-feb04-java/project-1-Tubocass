@@ -15,7 +15,6 @@ public class ReimbursementDAOImpl implements ReimbursementDAO
 	Connection connection = null;
 	PreparedStatement stmt = null;
 	
-	@Override
 	public List<Reimbursement> getAllRequests()
 	{
 		List<Reimbursement> requests = new ArrayList<Reimbursement>();
@@ -52,28 +51,28 @@ public class ReimbursementDAOImpl implements ReimbursementDAO
 		return requests;
 	}
 
-	@Override
+	
 	public List<Reimbursement> getAllRequestsByEmployee(int employeeId)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public List<Reimbursement> getAllRequestsPending()
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public Reimbursement getRequestById()
+	
+	public Reimbursement getRequestById(int id)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public boolean addRequest(Reimbursement r)
 	{
 		try {
@@ -81,9 +80,9 @@ public class ReimbursementDAOImpl implements ReimbursementDAO
 			String sql = "INSERT INTO requests VALUES (?, ?, ?, ?)";
 			stmt = connection.prepareStatement(sql);
 			
-			stmt.setString(1, String.valueOf(r.getId()));
-			stmt.setString(2, String.valueOf(r.getAmount()));
-			stmt.setString(3, String.valueOf(r.getEmployeeId()));
+			stmt.setInt(1, r.getId());
+			stmt.setDouble(2,r.getAmount()); // CAST ('10.2' AS DOUBLE PRECISION)
+			stmt.setInt(3, r.getEmployeeId());
 			stmt.setString(4, r.getStatus());
 			
 			if (stmt.executeUpdate() != 0)
@@ -98,14 +97,14 @@ public class ReimbursementDAOImpl implements ReimbursementDAO
 		}
 	}
 
-	@Override
+	
 	public boolean updateRequest(Reimbursement r)
 	{
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
+	
 	public boolean deleteRequestById(int id)
 	{
 		// TODO Auto-generated method stub

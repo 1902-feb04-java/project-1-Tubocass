@@ -17,7 +17,7 @@ public class TestDAO
 			System.out.println( requests.get(i).toString());
 		}
 		
-		boolean itWorked = reDAO.addRequest(new Reimbursement(1, 42.00, 1, "pending"));
+		boolean itWorked = reDAO.addRequest(new Reimbursement(2, 42.00, 1, "pending"));
 		System.out.println(itWorked);
 	}
 }
