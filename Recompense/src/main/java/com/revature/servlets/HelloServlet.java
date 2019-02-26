@@ -15,7 +15,8 @@ public class HelloServlet extends HttpServlet
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		PrintWriter pr = response.getWriter();
-		pr.println("<h1>Hey there baby!</h1>");
+		pr.println("<h1>Hey there "+request.getParameter("var")+"!</h1>");
 		pr.close();
+//		response.sendRedirect("new.html");
 	}
 }
