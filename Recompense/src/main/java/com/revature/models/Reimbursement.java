@@ -28,7 +28,7 @@ public class Reimbursement
 		this.id = id;
 		this.amount = money;
 		this.employeeId = empId;
-		this.status = Status.valueOf(stat.toLowerCase());
+		this.status = stat != null? Status.valueOf(stat.toLowerCase()): null;
 		//add date
 		this.image = imgData;
 	}

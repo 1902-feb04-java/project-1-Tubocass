@@ -32,11 +32,10 @@ public class ReimbursementDAOImpl implements ReimbursementDAO
 				int requestId = rs.getInt("id");
 				double amount = rs.getDouble("amount");
 				int employee = rs.getInt("employee_id");
-				String status = rs.getString("status");
-				byte[] data = rs.getBytes("image");
+				String status = rs.getString("status") != null?  rs.getString("status"):null;
+				byte[] data = rs.getBytes("image") != null?  rs.getBytes("image"):null;
 				Reimbursement request = new Reimbursement(requestId, amount, employee, status, data);
 				requests.add(request);
-				
 			}
 			
 			rs.close();
@@ -54,8 +53,35 @@ public class ReimbursementDAOImpl implements ReimbursementDAO
 	
 	public List<Reimbursement> getAllRequestsByEmployee(int employeeId)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		List<Reimbursement> requests = new ArrayList<Reimbursement>();
+		try {
+			connection = DAOUtilities.getConnection();
+			String sql = "SELECT * FROM requests WHERE employee_id = ?";
+			stmt = connection.prepareStatement(sql);
+			
+			stmt.setInt(1, employeeId);
+			
+			ResultSet rs = stmt.executeQuery();			// Queries the database
+
+			while (rs.next()) 
+			{
+				int requestId = rs.getInt("id");
+				double amount = rs.getDouble("amount");
+				int employee = rs.getInt("employee_id");
+				String status = rs.getString("status") != null?  rs.getString("status"):null;
+				byte[] data = rs.getBytes("image") != null?  rs.getBytes("image"):null;
+				Reimbursement request = new Reimbursement(requestId, amount, employee, status, data);
+				requests.add(request);
+			}
+			
+			rs.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeResources();
+		}
+		return requests;
 	}
 
 	

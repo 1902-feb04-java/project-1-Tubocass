@@ -10,15 +10,15 @@ public class TestDAO
 	{
 		ReimbursementDAO reDAO = DAOUtilities.getReimburseDAO();
 		
-		List<Reimbursement> requests = reDAO.getAllRequests();
+		List<Reimbursement> requests = reDAO.getAllRequestsByEmployee(1);
 		
 		for(int i =0;i<requests.size(); i++)
 		{
 			System.out.println( requests.get(i).toString());
 		}
 		
-		boolean itWorked = reDAO.addRequest(new Reimbursement(42.00, 1, "pending"));
-		System.out.println(itWorked);
+//		boolean itWorked = reDAO.addRequest(new Reimbursement(45.00, 1, "pending"));
+//		System.out.println(itWorked);
 	}
 }
 	
