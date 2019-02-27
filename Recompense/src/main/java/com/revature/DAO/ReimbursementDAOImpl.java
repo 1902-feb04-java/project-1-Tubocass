@@ -77,13 +77,13 @@ public class ReimbursementDAOImpl implements ReimbursementDAO
 	{
 		try {
 			connection = DAOUtilities.getConnection();
-			String sql = "INSERT INTO requests VALUES (?, ?, ?, ?)";
+			String sql = "INSERT INTO requests (amount, employee_id, status) VALUES (?, ?, ?)";
 			stmt = connection.prepareStatement(sql);
 			
-			stmt.setInt(1, r.getId());
-			stmt.setDouble(2,r.getAmount()); // CAST ('10.2' AS DOUBLE PRECISION)
-			stmt.setInt(3, r.getEmployeeId());
-			stmt.setString(4, r.getStatus());
+//			stmt.setInt(1, r.getId());
+			stmt.setDouble(1,r.getAmount()); // CAST ('10.2' AS DOUBLE PRECISION)
+			stmt.setInt(2, r.getEmployeeId());
+			stmt.setString(3, "pending");
 			
 			if (stmt.executeUpdate() != 0)
 				return true;

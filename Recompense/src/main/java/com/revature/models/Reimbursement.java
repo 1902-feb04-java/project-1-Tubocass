@@ -38,6 +38,10 @@ public class Reimbursement
 		this.employeeId = empId;
 		this.status = Status.valueOf(stat);
 	}
+	public Reimbursement(Double amount, int employeeId)
+	{
+		this(amount, employeeId, "pending");
+	}
 	@Override
 	public String toString()
 	{
