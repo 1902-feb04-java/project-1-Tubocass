@@ -20,24 +20,24 @@ public class HelloServlet extends HttpServlet
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		HttpSession session = request.getSession();
-		String user = (String) session.getAttribute("user");
-		if(user == null)
-		{
-			user = request.getParameter("user");
-			session.setAttribute("user", user);
-		}
+//		HttpSession session = request.getSession();
+//		String user = (String) session.getAttribute("user");
+//		if(user == null)
+//		{
+//			user = request.getParameter("user");
+//			session.setAttribute("user", user);
+//		}
+		String user = request.getParameter("user");
 		String password = request.getParameter("password");
 		
-		CredentialDAO credDAO = new CredentialDAO();
-		Credential cred = credDAO.getCred(user, password);
-		
+//		CredentialDAO credDAO = new CredentialDAO();
+//		Credential cred = credDAO.getCred(user, password);
+		response.setContentType("application/json");
 		PrintWriter pr = response.getWriter();
-		pr.println("<h1>Hey there "+user+"!</h1>");
+		pr.println("<h1>"+user+"!!!!</h1>");
 		pr.close();
-		
-//		request.getRequestDispatcher("requests_new").forward(request, response);
-		session.invalidate();
+		request.getRequestDispatcher("login.html").forward(request, response);
+//		session.invalidate();
 		
 		
 	}
