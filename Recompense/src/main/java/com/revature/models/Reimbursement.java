@@ -1,11 +1,18 @@
 package com.revature.models;
 
+import java.sql.Date;
+
 public class Reimbursement
 {
 	/*
-	 * id SERIAL PRIMARY KEY, amount MONEY NOT NULL, employee_id INTEGER REFERENCES
-	 * employees(id) NOT NULL, status VARCHAR(50), --would prefer an enum type,
-	 * e.pending, e.accepted, e.rejected image BYTEA
+	 * id SERIAL PRIMARY KEY, 
+	 * amount NUMERIC NOT NULL, 
+	 * employee_id INTEGER REFERENCES employees(id) NOT NULL
+	 * --would prefer an enum type, e.pending, e.accepted, e.rejected image BYTEA
+	 * status VARCHAR(50), 
+	 * image BYTEA
+	 * date DATE
+	 * description VARCHAR(100)
 	 */
 	public enum Status
 	{
@@ -16,37 +23,32 @@ public class Reimbursement
 	double amount;
 	int employeeId;
 	Status status;
-	//add date
 	byte[] image;
-
-	public Reimbursement(int id, double money, int empId, String stat)
-	{
-		this(id, money, empId, stat, null);
-	}
-	public Reimbursement(int id, double money, int empId, String stat, byte[] imgData)
+	Date date;
+	String description;
+	
+	public Reimbursement(int id, double money, int empId, String stat, byte[] imgData, Date date, String desc)
 	{
 		this.id = id;
 		this.amount = money;
 		this.employeeId = empId;
 		this.status = stat != null? Status.valueOf(stat.toLowerCase()): null;
-		//add date
+		this.date = date;
+		this.description = desc;
 		this.image = imgData;
 	}
-	public Reimbursement(double money, int empId, String stat)
+	public Reimbursement(double money, int empId, String desc)
 	{
 		this.amount = money;
 		this.employeeId = empId;
-		this.status = Status.valueOf(stat);
+		this.description = desc;
 	}
-	public Reimbursement(Double amount, int employeeId)
-	{
-		this(amount, employeeId, "pending");
-	}
+	
 	@Override
 	public String toString()
 	{
 		return "Reimbursement [id=" + id + ", amount=" + amount + ", employeeId=" + employeeId + ", status=" + status
-				+ "]";
+				+", date=" + date + ", description=" + description +"]";
 	}
 	public int getId()
 	{
@@ -72,11 +74,32 @@ public class Reimbursement
 	{
 		return image;
 	}
+	
+	public Date getDate() 
+	{
+		return date;
+	}
+	public String getDescription() 
+	{
+		return description;
+	}
+	public void setStatus(Status status) 
+	{
+		this.status = status;
+	}
+
 	public void setImage(byte[] data)
 	{
-		this.image = data;
-		
+		this.image = data;	
 	}
-	
 
+	public void setDescription(String description) 
+	{
+		this.description = description;
+	}
+
+	public void setDate(Date date) 
+	{
+		this.date = date;
+	}
 }

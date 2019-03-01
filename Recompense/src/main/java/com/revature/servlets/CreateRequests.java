@@ -24,7 +24,8 @@ public class CreateRequests extends HttpServlet
 		Double amount = Double.valueOf(request.getParameter("request_amount"));
 		int employeeId = Integer.valueOf(request.getParameter("employee_id"));
 		String status = request.getParameter("request_status");
-		if(reDAO.addRequest(new Reimbursement(amount, employeeId)))
+		String desc = request.getParameter("request_description");
+		if(reDAO.addRequest(new Reimbursement(amount, employeeId, desc)))
 		{
 			request.setAttribute("message", "Request added");
 			request.getRequestDispatcher("/requests_new.html").forward(request, response);

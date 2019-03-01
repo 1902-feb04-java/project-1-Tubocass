@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.revature.DAO.CredentialDAO;
+import com.revature.models.Credential;
+
 @WebServlet("/hey")
 public class HelloServlet extends HttpServlet
 {
@@ -26,11 +29,16 @@ public class HelloServlet extends HttpServlet
 		}
 		String password = request.getParameter("password");
 		
-//		response.sendRedirect("new.html");
+		CredentialDAO credDAO = new CredentialDAO();
+		Credential cred = credDAO.getCred(user, password);
 		
 		PrintWriter pr = response.getWriter();
 		pr.println("<h1>Hey there "+user+"!</h1>");
 		pr.close();
+		
+//		request.getRequestDispatcher("requests_new").forward(request, response);
 		session.invalidate();
+		
+		
 	}
 }

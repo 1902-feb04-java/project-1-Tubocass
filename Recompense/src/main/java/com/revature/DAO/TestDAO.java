@@ -10,7 +10,7 @@ public class TestDAO
 	{
 		ReimbursementDAO reDAO = DAOUtilities.getReimburseDAO();
 		
-		List<Reimbursement> requests = reDAO.getAllRequestsByEmployee(1);
+		List<Reimbursement> requests = reDAO.getAllRequestsPending();
 		
 		for(int i =0;i<requests.size(); i++)
 		{
