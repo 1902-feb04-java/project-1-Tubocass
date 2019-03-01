@@ -25,7 +25,8 @@ public class CredentialDAO
 			stmt.setString(2, password);
 
 			ResultSet rs = stmt.executeQuery();
-
+			
+			rs.next();
 			int id = rs.getInt("user_id");
 			cred = new Credential(id, user, password);
 		} catch (SQLException e)
@@ -36,6 +37,33 @@ public class CredentialDAO
 			closeResources();
 		}
 		return cred;
+	}
+	
+	public boolean tryLogin(String user, String password)
+	{
+		Credential cred = null;
+		try
+		{
+			connection = DAOUtilities.getConnection();
+			String sql = "SELECT * FROM credentials WHERE user_name = ? AND password = ?";
+			stmt = connection.prepareStatement(sql);
+
+			stmt.setString(1, user);
+			stmt.setString(2, password);
+
+			ResultSet rs = stmt.executeQuery();
+			
+			rs.next();
+			int id = rs.getInt("user_id");
+			cred = new Credential(id, user, password);
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+		} finally
+		{
+			closeResources();
+		}
+		return cred == null? false : true;
 	}
 	
 	private void closeResources()
