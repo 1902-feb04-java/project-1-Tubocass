@@ -28,12 +28,12 @@ public class CreateRequests extends HttpServlet
 		if(reDAO.addRequest(new Reimbursement(amount, employeeId, desc)))
 		{
 			request.setAttribute("message", "Request added");
-			request.getRequestDispatcher("/requests_new.html").forward(request, response);
+//			request.getRequestDispatcher("/requests_new.html").forward(request, response);
 			response.getWriter().write("Post Heard");
 			System.out.println("Added Successfully");
 		}else  {
 			request.setAttribute("message", "Request was not added");
-			request.getRequestDispatcher("/requests_new.html").forward(request, response);
+//			request.getRequestDispatcher("/requests_new.html").forward(request, response);
 			response.getWriter().write("womp-womp");
 			System.out.println("FAILURE");
 		}
