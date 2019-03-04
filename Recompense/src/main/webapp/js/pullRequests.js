@@ -9,7 +9,8 @@ function pullDown(status)
 {
 	clearTable();
     var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = ()=>{
+    xhr.onreadystatechange = ()=> 
+    {
         if (xhr.readyState == 4) 
         {
         	var data = JSON.parse(xhr.response);

@@ -3,7 +3,7 @@ var submit = document.getElementById("submit");
     submit.addEventListener('click', (e) => 
     {
         //e.preventDefault();
-        //ajax('../login');
+        ajax('../login');
     })
 
     function ajax(url) 
@@ -36,9 +36,9 @@ var submit = document.getElementById("submit");
 //             }
 //         }
          xhr.open('POST', url, true);
-         var pack = JSON.stringify({ 'user': user, 'password': password })
-//         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-         xhr.send(pack);
+//         var pack = JSON.stringify({ 'user': user, 'password': password })
+         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+//         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+         xhr.send("user="+user+"&password="+password);
       
     }

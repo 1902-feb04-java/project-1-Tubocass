@@ -39,6 +39,7 @@ public class HelloServlet extends HttpServlet
 			session.setAttribute("user", user);
 			session.setAttribute("userId", empId);
 			session.setAttribute("isManager", isManager);
+			System.out.println(isManager);
 //			response.sendRedirect("html/home.html");
 			request.getRequestDispatcher("/homepage").forward(request, response);
 		}else {

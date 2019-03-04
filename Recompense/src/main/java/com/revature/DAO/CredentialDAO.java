@@ -41,9 +41,7 @@ public class CredentialDAO
 	
 	public int tryLogin(String user, String password)
 	{
-		//Credential cred = null;
-		boolean matched = false;
-		int id =0;
+		int id = 0;
 		try
 		{
 			connection = DAOUtilities.getConnection();
@@ -59,7 +57,7 @@ public class CredentialDAO
 				id = rs.getInt(1);
 			}
 			System.out.println(id);
-			//cred = new Credential(id, user, password);
+			
 		} catch (SQLException e)
 		{
 			e.printStackTrace();

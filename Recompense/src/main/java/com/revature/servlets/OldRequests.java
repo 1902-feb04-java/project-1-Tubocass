@@ -19,12 +19,9 @@ import com.revature.models.Reimbursement;
 public class OldRequests extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		// response.getWriter().append("Served at: ").append(request.getContextPath());
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
 		String reqStatus = request.getParameter("status");
-//		System.out.println(reqStatus);
 		
 		ReimbursementDAO reqDAO = DAOUtilities.getReimburseDAO();
 		List<Reimbursement> requests = new ArrayList<Reimbursement>();
@@ -34,13 +31,8 @@ public class OldRequests extends HttpServlet {
 		response.getWriter().write(json);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
 		doGet(request, response);
 	}
 

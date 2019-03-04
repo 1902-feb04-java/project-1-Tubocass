@@ -12,7 +12,7 @@ public class TestDAO
 		ReimbursementDAO reDAO = DAOUtilities.getReimburseDAO();
 		CredentialDAO credDAO = new CredentialDAO();
 		Credential creds = credDAO.getCred("BigBoi", "puppies");
-		List<Reimbursement> requests = reDAO.getAllRequestsPending();
+		List<Reimbursement> requests = reDAO.getAllRequestsByStatus("pending");
 		Reimbursement req = reDAO.getRequestById(24);
 		
 		System.out.println(req.toString());

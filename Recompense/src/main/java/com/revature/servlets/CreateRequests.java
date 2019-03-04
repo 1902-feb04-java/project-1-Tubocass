@@ -19,10 +19,11 @@ public class CreateRequests extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		System.out.println(request.getParameter("request_amount"));
+		int employeeId = -1;
+		employeeId = (int) request.getSession(false).getAttribute("userId"); //Integer.valueOf(request.getParameter("employee_id"));
+		System.out.println(employeeId);
 		ReimbursementDAO reDAO = DAOUtilities.getReimburseDAO();
 		Double amount = Double.valueOf(request.getParameter("request_amount"));
-		int employeeId = Integer.valueOf(request.getParameter("employee_id"));
 //		String status = request.getParameter("request_status");
 		String desc = request.getParameter("request_description");
 		if(reDAO.addRequest(new Reimbursement(amount, employeeId, desc)))
