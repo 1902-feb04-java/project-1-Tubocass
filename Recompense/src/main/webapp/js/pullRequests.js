@@ -4,9 +4,7 @@ document.getElementById('populate').addEventListener('click', function(){
         if (xhr.readyState == 4) 
         {
         	var data = JSON.parse(xhr.response);
-        	console.log(data);
-        	//let info =[...data];
-        	//console.log(info);
+//        	console.log(data);
         	let table = document.getElementById("response-table");
         	for(let item of data)
         	{
@@ -19,15 +17,9 @@ document.getElementById('populate').addEventListener('click', function(){
 					<td>${item.amount}</td>
 					<td>${item.description}</td>
 					<td>${item.status}</td>
-				</tr>
-					`;
+				</tr>`;
         		table.insertAdjacentHTML('beforeend', html)
-        		//let node = document.createTextNode(item.toString());
-//        		let el = document.createElement("li")
-//        		el.append(node);
-//        		list.append(el);
         	}
-          	
         }
     };
     xhr.open('POST','../past_requests', true);

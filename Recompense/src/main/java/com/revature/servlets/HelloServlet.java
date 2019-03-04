@@ -7,9 +7,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.revature.DAO.CredentialDAO;
-import com.revature.models.Credential;
 
 @WebServlet("/login")
 public class HelloServlet extends HttpServlet
@@ -18,21 +18,24 @@ public class HelloServlet extends HttpServlet
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-//		HttpSession session = request.getSession();
-//		String user = (String) session.getAttribute("user");
-//		if(user == null)
-//		{
-//			user = request.getParameter("user");
-//			session.setAttribute("user", user);
-//		}
-		String user = request.getParameter("user");
+		HttpSession session = request.getSession();
+		String user = (String) session.getAttribute("user");
+		if(user == null)
+		{
+			user = request.getParameter("user");
+		}
+//		user = request.getParameter("user");
 		String password = request.getParameter("password");
 		
 		CredentialDAO credDAO = new CredentialDAO();
-		if(credDAO.tryLogin(user, password))
+		int empId = credDAO.tryLogin(user, password);
+		if(empId>0)
 		{
-			response.sendRedirect("home.html");
+			session.setAttribute("user", user);
+			session.setAttribute("userId", empId);
+			response.sendRedirect("html/home.html");
 		}else {
+			response.sendRedirect("html/login.html");
 			response.getWriter().write("failure");
 		}
 	}

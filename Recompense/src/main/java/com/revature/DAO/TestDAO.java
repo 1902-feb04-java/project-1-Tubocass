@@ -13,7 +13,9 @@ public class TestDAO
 		CredentialDAO credDAO = new CredentialDAO();
 		Credential creds = credDAO.getCred("BigBoi", "puppies");
 		List<Reimbursement> requests = reDAO.getAllRequestsPending();
+		Reimbursement req = reDAO.getRequestById(24);
 		
+		System.out.println(req.toString());
 		for(int i =0;i<requests.size(); i++)
 		{
 			System.out.println( requests.get(i).toString());

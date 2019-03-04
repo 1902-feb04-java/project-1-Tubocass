@@ -79,7 +79,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO
 			stmt.setInt(1, id);
 
 			ResultSet rs = stmt.executeQuery();
-
+			rs.next();
 			int requestId = rs.getInt("id");
 			double amount = rs.getDouble("amount");
 			int employee = rs.getInt("employee_id");
