@@ -24,8 +24,9 @@ public class ReimbursementDAOImpl implements ReimbursementDAO
 		List<Reimbursement> requests = new ArrayList<Reimbursement>();
 		try
 		{
+			String base = "SELECT * FROM requests ";
 			connection = DAOUtilities.getConnection();
-			stmt = connection.prepareStatement(sql);
+			stmt = connection.prepareStatement(base+sql);
 
 			ResultSet rs = stmt.executeQuery();
 
@@ -55,14 +56,14 @@ public class ReimbursementDAOImpl implements ReimbursementDAO
 	}
 	public List<Reimbursement> getAllRequestsByEmployee(int employeeId)
 	{
-		String sql = String.format("SELECT * FROM requests WHERE employee_id = %d", employeeId);;
+		String sql = String.format("WHERE employee_id = %d", employeeId);;
 
 		return getAllRequests(sql);
 	}
 
-	public List<Reimbursement> getAllRequestsPending()
+	public List<Reimbursement> getAllRequestsByStatus(String status)
 	{
-		String sql = String.format("SELECT * FROM requests WHERE status = 'pending'");;
+		String sql = String.format("WHERE status = '%s'", status);;
 
 		return getAllRequests(sql);
 	}

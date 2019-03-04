@@ -23,9 +23,13 @@ public class OldRequests extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
+		String reqStatus = request.getParameter("status");
+//		System.out.println(reqStatus);
+		
 		ReimbursementDAO reqDAO = DAOUtilities.getReimburseDAO();
 		List<Reimbursement> requests = new ArrayList<Reimbursement>();
-		requests = reqDAO.getAllRequests();
+		requests = reqDAO.getAllRequestsByStatus(reqStatus);
+		
 		String json = new Gson().toJson(requests);
 		response.getWriter().write(json);
 	}

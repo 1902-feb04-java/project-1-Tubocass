@@ -7,7 +7,7 @@ public interface ReimbursementDAO
 {
 	public List<Reimbursement> getAllRequests();
 	public List<Reimbursement> getAllRequestsByEmployee(int employeeId);
-	public List<Reimbursement> getAllRequestsPending();
+	public List<Reimbursement> getAllRequestsByStatus(String status);
 	public Reimbursement getRequestById(int id);
 	
 	public boolean addRequest(Reimbursement r);

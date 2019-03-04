@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.revature.DAO.CredentialDAO;
+import com.revature.DAO.DAOUtilities;
+import com.revature.DAO.EmployeeDAO;
 
 @WebServlet("/login")
 public class HelloServlet extends HttpServlet
@@ -28,12 +30,17 @@ public class HelloServlet extends HttpServlet
 		String password = request.getParameter("password");
 		
 		CredentialDAO credDAO = new CredentialDAO();
+		EmployeeDAO empDAO = DAOUtilities.getEmployeeDAO();
 		int empId = credDAO.tryLogin(user, password);
+		// is employee a manager?
 		if(empId>0)
 		{
+			boolean isManager = empDAO.isManager(empId);
 			session.setAttribute("user", user);
 			session.setAttribute("userId", empId);
-			response.sendRedirect("html/home.html");
+			session.setAttribute("isManager", isManager);
+//			response.sendRedirect("html/home.html");
+			request.getRequestDispatcher("/homepage").forward(request, response);
 		}else {
 			response.sendRedirect("html/login.html");
 			response.getWriter().write("failure");

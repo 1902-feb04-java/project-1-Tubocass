@@ -32,14 +32,6 @@ public class Employee
         this.firstName = fName;
         this.lastName = lName;
         this.managerId = manId;
-        //id, title, first, last, managerId
-        // Scanner scan = new Scanner(info);
-        // id = nextId();// scan.nextInt();
-        // firstName = scan.next();
-        // lastName = scan.next();
-        // jobTitle = scan.next();
-        // reportsTo = scan.nextInt();
-        // scan.close();
         System.out.println(this.toString());
     }
     @Override
