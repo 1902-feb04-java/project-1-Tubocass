@@ -1,6 +1,8 @@
 package com.revature.models;
 
 import java.sql.Date;
+import java.util.Base64;
+
 
 public class Reimbursement
 {
@@ -26,6 +28,7 @@ public class Reimbursement
 	byte[] image;
 	Date date;
 	String description;
+	String imageString;
 	
 	public Reimbursement(int id, double money, int empId, String stat, byte[] imgData, Date date, String desc)
 	{
@@ -91,6 +94,10 @@ public class Reimbursement
 	public void setImage(byte[] data)
 	{
 		this.image = data;	
+	}
+	public void setImageString(byte[] data)
+	{
+		this.imageString = data == null? null: Base64.getEncoder().encodeToString(data);	
 	}
 
 	public void setDescription(String description) 

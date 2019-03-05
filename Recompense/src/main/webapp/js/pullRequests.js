@@ -27,7 +27,10 @@ function pullDown(status)
 					<td>${item.amount}</td>
 					<td>${item.description}</td>
 					<td>${item.status}</td>
+					<td><img src="data:image/png;base64,${item.imageString}"></td>
 				</tr>`;
+   
+        		console.log( `${item.id}, ${item.imageString}`);
         		table.insertAdjacentHTML('beforeend', html)
         	}
         }

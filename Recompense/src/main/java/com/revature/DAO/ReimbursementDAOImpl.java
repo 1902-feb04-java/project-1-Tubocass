@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.postgresql.util.Base64;
+
 import com.revature.models.Reimbursement;
 
 public class ReimbursementDAOImpl implements ReimbursementDAO
@@ -40,6 +42,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO
 				Date date = Date.valueOf(rs.getString("date"));
 				String desc = rs.getString("description");
 				Reimbursement request = new Reimbursement(requestId, amount, employee, status, image, date, desc);
+				request.setImageString(image);
 				requests.add(request);
 			}
 
@@ -84,11 +87,12 @@ public class ReimbursementDAOImpl implements ReimbursementDAO
 			int requestId = rs.getInt("id");
 			double amount = rs.getDouble("amount");
 			int employee = rs.getInt("employee_id");
-			String status = rs.getString("status");// != null ? rs.getString("status") : null;
-			byte[] image = rs.getBytes("image");// != null ? rs.getBytes("image") : null;
+			String status = rs.getString("status");
+			byte[] image = rs.getBytes("image");
 			Date date = Date.valueOf(rs.getString("date"));
 			String desc = rs.getString("description");
 			request = new Reimbursement(requestId, amount, employee, status, image, date, desc);
+			request.setImageString(image);
 		} catch (SQLException e)
 		{
 			e.printStackTrace();
