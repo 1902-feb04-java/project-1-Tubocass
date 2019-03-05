@@ -11,10 +11,10 @@
 <body>
 
 <br>
-<form method="POST" action="../create_requests" id="create_requests_form">
+<form method="POST" action="../create_requests" id="create_requests_form" enctype="multipart/form-data"> 
     <input type="text" name="request_amount" placeholder="Amount Requested">
-     <input type="text" name="request_description" placeholder="description">
-    <input type="hidden" name="employee_id" value="2">
+    <input type="text" name="request_description" placeholder="description">
+    <input type="file" name="image">
     <input type="submit" value="Submit">
 </form>
   

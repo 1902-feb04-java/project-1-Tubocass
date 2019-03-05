@@ -48,7 +48,7 @@ public class Reimbursement
 	public String toString()
 	{
 		return "Reimbursement [id=" + id + ", amount=" + amount + ", employeeId=" + employeeId + ", status=" + status
-				+", date=" + date + ", description=" + description +"]";
+				+", date=" + date + ", description=" + description +", file size="+image+"]";
 	}
 	public int getId()
 	{

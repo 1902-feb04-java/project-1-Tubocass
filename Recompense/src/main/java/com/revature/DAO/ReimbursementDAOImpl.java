@@ -17,7 +17,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO
 
 	public List<Reimbursement> getAllRequests()
 	{
-		return getAllRequests("SELECT * FROM requests");
+		return getAllRequests("");
 	}
 	public List<Reimbursement> getAllRequests(String sql)
 	{
@@ -36,10 +36,10 @@ public class ReimbursementDAOImpl implements ReimbursementDAO
 				double amount = rs.getDouble("amount");
 				int employee = rs.getInt("employee_id");
 				String status = rs.getString("status");// != null ? rs.getString("status") : null;
-				byte[] data = rs.getBytes("image");// != null ? rs.getBytes("image") : null;
+				byte[] image = rs.getBytes("image");// != null ? rs.getBytes("image") : null;
 				Date date = Date.valueOf(rs.getString("date"));
 				String desc = rs.getString("description");
-				Reimbursement request = new Reimbursement(requestId, amount, employee, status, data, date, desc);
+				Reimbursement request = new Reimbursement(requestId, amount, employee, status, image, date, desc);
 				requests.add(request);
 			}
 
@@ -85,10 +85,10 @@ public class ReimbursementDAOImpl implements ReimbursementDAO
 			double amount = rs.getDouble("amount");
 			int employee = rs.getInt("employee_id");
 			String status = rs.getString("status");// != null ? rs.getString("status") : null;
-			byte[] data = rs.getBytes("image");// != null ? rs.getBytes("image") : null;
+			byte[] image = rs.getBytes("image");// != null ? rs.getBytes("image") : null;
 			Date date = Date.valueOf(rs.getString("date"));
 			String desc = rs.getString("description");
-			request = new Reimbursement(requestId, amount, employee, status, data, date, desc);
+			request = new Reimbursement(requestId, amount, employee, status, image, date, desc);
 		} catch (SQLException e)
 		{
 			e.printStackTrace();
@@ -104,13 +104,14 @@ public class ReimbursementDAOImpl implements ReimbursementDAO
 		try
 		{
 			connection = DAOUtilities.getConnection();
-			String sql = "INSERT INTO requests (amount, employee_id, description) VALUES (?, ?, ?)";
+			String sql = "INSERT INTO requests (amount, employee_id, description, image) VALUES (?, ?, ?, ?)";
 			stmt = connection.prepareStatement(sql);
 
 //			stmt.setInt(1, r.getId());
 			stmt.setDouble(1, r.getAmount());
 			stmt.setInt(2, r.getEmployeeId());
 			stmt.setString(3, r.getDescription());
+			stmt.setBytes(4, r.getImage());
 
 			if (stmt.executeUpdate() != 0)
 				return true;
