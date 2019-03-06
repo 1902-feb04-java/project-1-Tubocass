@@ -17,12 +17,7 @@
   	<description></description>
   	<servlet-class>com.revature.servlets.CreateEmployee</servlet-class>
   </servlet>
-  <servlet>
-  	<servlet-name>OldRequests</servlet-name>
-  	<display-name>OldRequests</display-name>
-  	<description></description>
-  	<servlet-class>com.revature.servlets.OldRequests</servlet-class>
-  </servlet>
+ 
   <servlet>
   	<servlet-name>HomepageServlet</servlet-name>
   	<display-name>HomepageServlet</display-name>
@@ -43,10 +38,7 @@
   	<servlet-name>CreateEmployee</servlet-name>
   	<url-pattern>/CreateEmployee</url-pattern>
   </servlet-mapping>
-  <servlet-mapping>
-  	<servlet-name>OldRequests</servlet-name>
-  	<url-pattern>/OldRequests</url-pattern>
-  </servlet-mapping>
+ 
   <servlet-mapping>
   	<servlet-name>HomepageServlet</servlet-name>
   	<url-pattern>/HomepageServlet</url-pattern>

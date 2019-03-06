@@ -12,9 +12,10 @@ import javax.servlet.http.HttpSession;
 import com.revature.DAO.CredentialDAO;
 import com.revature.DAO.DAOUtilities;
 import com.revature.DAO.EmployeeDAO;
+import com.revature.models.Employee;
 
 @WebServlet("/login")
-public class HelloServlet extends HttpServlet
+public class LoginServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
 	@Override
@@ -35,11 +36,11 @@ public class HelloServlet extends HttpServlet
 		// is employee a manager?
 		if(empId>0)
 		{
-			boolean isManager = empDAO.isManager(empId);
+			Employee emploee = empDAO.getEmployeeById(empId);
 			session.setAttribute("user", user);
 			session.setAttribute("userId", empId);
-			session.setAttribute("isManager", isManager);
-			System.out.println(isManager);
+			session.setAttribute("isManager", emploee.IsAManager());
+			System.out.println(emploee.IsAManager());
 //			response.sendRedirect("html/home.html");
 			request.getRequestDispatcher("/homepage").forward(request, response);
 		}else {

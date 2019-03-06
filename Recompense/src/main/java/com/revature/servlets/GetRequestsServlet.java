@@ -16,8 +16,8 @@ import com.revature.DAO.ReimbursementDAO;
 import com.revature.models.Reimbursement;
 
 @WebServlet("/past_requests")
-public class OldRequests extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+public class GetRequestsServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L; 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{

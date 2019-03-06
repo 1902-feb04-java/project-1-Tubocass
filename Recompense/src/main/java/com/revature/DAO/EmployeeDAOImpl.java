@@ -1,7 +1,5 @@
 package com.revature.DAO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -9,32 +7,29 @@ import java.util.List;
 
 import com.revature.models.Employee;
 
-public class EmployeeDAOImpl implements EmployeeDAO
+public class EmployeeDAOImpl extends CommonDAO implements EmployeeDAO
 {
-	Connection connection = null;
-	PreparedStatement stmt = null;
-
 	@Override
-	public boolean isManager(int id) {
-		// TODO Auto-generated method stub
-		return false;
+	public Employee getEmployeeById(int id) 
+	{
+		String sql = String.format("WHERE id = %d", id);
+		return getAllEmployees(sql).get(0);
 	}
-
-	@Override
-	public Employee getEmployeeById(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+ 
 	@Override
 	public List<Employee> getAllEmployees() 
+	{	
+		return getAllEmployees("");
+	}
+
+	public List<Employee> getAllEmployees(String sql) 
 	{
 		List<Employee> employees = new ArrayList<Employee>();
 		
 		try {
 			String base = "SELECT * FROM employees ";
 			connection = DAOUtilities.getConnection();
-			stmt = connection.prepareStatement(base);
+			stmt = connection.prepareStatement(base+sql);
 			
 			ResultSet rs = stmt.executeQuery();
 			//id, job_title, first_name, last_name, reports_to, ismanager
@@ -61,7 +56,6 @@ public class EmployeeDAOImpl implements EmployeeDAO
 		
 		return employees;
 	}
-
 	@Override
 	public void updateEmployee(Employee employee) {
 		// TODO Auto-generated method stub
@@ -78,28 +72,5 @@ public class EmployeeDAOImpl implements EmployeeDAO
 	public void deleteEmployee(int id) {
 		// TODO Auto-generated method stub
 		
-	}
-	
-	private void closeResources()
-	{
-		try
-		{
-			if (stmt != null)
-				stmt.close();
-		} catch (SQLException e)
-		{
-			System.out.println("Could not close statement!");
-			e.printStackTrace();
-		}
-
-		try
-		{
-			if (connection != null)
-				connection.close();
-		} catch (SQLException e)
-		{
-			System.out.println("Could not close connection!");
-			e.printStackTrace();
-		}
 	}
 }

@@ -6,7 +6,6 @@ import com.revature.models.Employee;
 
 public interface EmployeeDAO
 {
-	public boolean isManager(int id);
 	public Employee getEmployeeById(int id);
 	public List<Employee> getAllEmployees();
 	public void updateEmployee(Employee employee);

@@ -1,27 +1,20 @@
 package com.revature.DAO;
 
-import java.sql.Connection;
 import java.sql.Date;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.postgresql.util.Base64;
-
 import com.revature.models.Reimbursement;
 
-public class ReimbursementDAOImpl implements ReimbursementDAO
+public class ReimbursementDAOImpl extends CommonDAO implements ReimbursementDAO
 {
-	Connection connection = null;
-	PreparedStatement stmt = null;
-
 	public List<Reimbursement> getAllRequests()
 	{
 		return getAllRequests("");
 	}
-	public List<Reimbursement> getAllRequests(String sql)
+	protected List<Reimbursement> getAllRequests(String sql)
 	{
 		List<Reimbursement> requests = new ArrayList<Reimbursement>();
 		try
@@ -131,28 +124,4 @@ public class ReimbursementDAOImpl implements ReimbursementDAO
 		}
 		return requests;
 	}
-
-	private void closeResources()
-	{
-		try
-		{
-			if (stmt != null)
-				stmt.close();
-		} catch (SQLException e)
-		{
-			System.out.println("Could not close statement!");
-			e.printStackTrace();
-		}
-
-		try
-		{
-			if (connection != null)
-				connection.close();
-		} catch (SQLException e)
-		{
-			System.out.println("Could not close connection!");
-			e.printStackTrace();
-		}
-	}
-
 }
