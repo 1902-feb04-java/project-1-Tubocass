@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import com.revature.DAO.DAOUtilities;
+import com.revature.DAO.DAOUtil;
 import com.revature.DAO.ReimbursementDAO;
 import com.revature.models.Reimbursement;
 
@@ -26,7 +26,7 @@ public class CreateRequests extends HttpServlet
 	{
 		int employeeId = -1;
 		employeeId = (int) request.getSession(false).getAttribute("userId");
-		ReimbursementDAO reDAO = DAOUtilities.getReimburseDAO();
+		ReimbursementDAO reDAO = DAOUtil.getReimburseDAO();
 		Double amount = Double.valueOf(request.getParameter("request_amount"));
 		String desc = request.getParameter("request_description");
 		Reimbursement imburse = new Reimbursement(amount, employeeId, desc);

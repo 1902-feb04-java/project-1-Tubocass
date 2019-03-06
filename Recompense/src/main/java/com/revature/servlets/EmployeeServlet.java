@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.revature.DAO.DAOUtilities;
+import com.revature.DAO.DAOUtil;
 import com.revature.DAO.EmployeeDAO;
 import com.revature.models.Employee;
 
@@ -26,7 +26,7 @@ public class EmployeeServlet extends HttpServlet {
 	{
 		String employee = request.getParameter("who");
 		
-		EmployeeDAO empDAO = DAOUtilities.getEmployeeDAO();
+		EmployeeDAO empDAO = DAOUtil.getEmployeeDAO();
 		List<Employee> employees = empDAO.getAllEmployees();
 		
 		String json = new Gson().toJson(employees);

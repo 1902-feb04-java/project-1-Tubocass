@@ -8,7 +8,7 @@ import java.sql.SQLException;
  * Class used to retrieve DAO Implementations. Serves as a factory. Also manages
  * a single instance of the database connection.
  */
-public class DAOUtilities
+public class DAOUtil
 {
 
 	private static final String CONNECTION_USERNAME = "postgres";
@@ -22,7 +22,7 @@ public class DAOUtilities
 		{
 			try
 			{
-				Class.forName("org.postgresql.Driver");
+				Class.forName("org.postgresql.Driver"); 
 			} catch (ClassNotFoundException e)
 			{
 				System.out.println("Could not register driver!");

@@ -20,7 +20,7 @@ public class ReimbursementDAOImpl extends CommonDAO implements ReimbursementDAO
 		try
 		{
 			String base = "SELECT * FROM requests ";
-			connection = DAOUtilities.getConnection();
+			connection = DAOUtil.getConnection();
 			stmt = connection.prepareStatement(base+sql);
 
 			ResultSet rs = stmt.executeQuery();
@@ -63,7 +63,7 @@ public class ReimbursementDAOImpl extends CommonDAO implements ReimbursementDAO
 	{
 		try
 		{
-			connection = DAOUtilities.getConnection();
+			connection = DAOUtil.getConnection();
 			String sql = "INSERT INTO requests (amount, employee_id, description, image) VALUES (?, ?, ?, ?)";
 			stmt = connection.prepareStatement(sql);
 
@@ -91,7 +91,7 @@ public class ReimbursementDAOImpl extends CommonDAO implements ReimbursementDAO
 	{
 		try
 		{
-			connection = DAOUtilities.getConnection();
+			connection = DAOUtil.getConnection();
 			String sql = "UPDATE requests SET status = ? , finalized_by = ?"
 					+"WHERE id = ?";
 			stmt = connection.prepareStatement(sql);

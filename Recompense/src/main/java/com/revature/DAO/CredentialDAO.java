@@ -12,7 +12,7 @@ public class CredentialDAO extends CommonDAO
 		Credential cred = null;;
 		try
 		{
-			connection = DAOUtilities.getConnection();
+			connection = DAOUtil.getConnection();
 			String sql = "SELECT * FROM credentials WHERE user_name = ? AND password = ?";
 			stmt = connection.prepareStatement(sql);
 
@@ -39,7 +39,7 @@ public class CredentialDAO extends CommonDAO
 		int id = 0;
 		try
 		{
-			connection = DAOUtilities.getConnection();
+			connection = DAOUtil.getConnection();
 			String sql = "SELECT user_id FROM credentials WHERE user_name = ? AND password = ?";
 			stmt = connection.prepareStatement(sql);
 

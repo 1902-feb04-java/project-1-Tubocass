@@ -19,7 +19,7 @@ public class EmployeeDAOImpl extends CommonDAO implements EmployeeDAO
 	@Override
 	public Employee getEmployeeByName(String fName, String lName) 
 	{
-		String fn = "'"+fName +"'", ln = "'"+lName +"'";
+		String fn = "'"+fName +"'", ln = "'"+lName +"'"; 
 		String sql = String.format("WHERE first_name = %s AND last_name = %s", fn, ln);
 		return getAllEmployees(sql).get(0);
 	}
@@ -35,7 +35,7 @@ public class EmployeeDAOImpl extends CommonDAO implements EmployeeDAO
 		
 		try {
 			String base = "SELECT * FROM employees ";
-			connection = DAOUtilities.getConnection();
+			connection = DAOUtil.getConnection();
 			stmt = connection.prepareStatement(base+sql);
 			
 			ResultSet rs = stmt.executeQuery();
@@ -64,10 +64,34 @@ public class EmployeeDAOImpl extends CommonDAO implements EmployeeDAO
 		return employees;
 	}
 	@Override
-	public boolean updateEmployee(Employee employee) {
-		return false;
-		// TODO Auto-generated method stub
-		
+	public boolean updateEmployee(Employee e) {
+		try
+		{
+			//id, job_title, first_name, last_name, reports_to, ismanager
+			connection = DAOUtil.getConnection();
+			String sql = "UPDATE employees SET job_title = ? , first_name = ?, last_name = ?, reports_to = ?, ismanager = ?"
+			+"WHERE id = ?";
+			stmt = connection.prepareStatement(sql);
+
+			stmt.setString(1, e.getTitle());
+			stmt.setString(2, e.getFirstName());
+			stmt.setString(3, e.getLastName());
+			stmt.setInt(4, e.getManagerId());
+			stmt.setBoolean(5, e.IsAManager());
+			stmt.setInt(6, e.getId());
+
+			if (stmt.executeUpdate() != 0)
+				return true;
+			else
+				return false;
+		} catch (SQLException ex)
+		{
+			ex.printStackTrace();
+			return false;
+		} finally
+		{
+			closeResources();
+		}
 	}
 
 	@Override
@@ -75,7 +99,7 @@ public class EmployeeDAOImpl extends CommonDAO implements EmployeeDAO
 	{
 		//id, job_title, first_name, last_name, reports_to, ismanager
 		try {
-			connection = DAOUtilities.getConnection();
+			connection = DAOUtil.getConnection();
 			String sql = "INSERT INTO employees (job_title, first_name, last_name, reports_to, ismanager)"
 					+"VALUES(?,?,?,?,?)";
 			stmt = connection.prepareStatement(sql);

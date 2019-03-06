@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.revature.DAO.DAOUtilities;
+import com.revature.DAO.DAOUtil;
 import com.revature.DAO.ReimbursementDAO;
 import com.revature.models.Reimbursement;
 
@@ -23,7 +23,7 @@ public class GetRequestsServlet extends HttpServlet {
 	{
 		String reqStatus = request.getParameter("status");
 		
-		ReimbursementDAO reqDAO = DAOUtilities.getReimburseDAO();
+		ReimbursementDAO reqDAO = DAOUtil.getReimburseDAO();
 		List<Reimbursement> requests = new ArrayList<Reimbursement>();
 		requests = reqDAO.getAllRequestsByStatus(reqStatus);
 		

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.revature.DAO.CredentialDAO;
-import com.revature.DAO.DAOUtilities;
+import com.revature.DAO.DAOUtil;
 import com.revature.DAO.EmployeeDAO;
 import com.revature.models.Employee;
 
@@ -31,7 +31,7 @@ public class LoginServlet extends HttpServlet
 		String password = request.getParameter("password");
 		
 		CredentialDAO credDAO = new CredentialDAO();
-		EmployeeDAO empDAO = DAOUtilities.getEmployeeDAO();
+		EmployeeDAO empDAO = DAOUtil.getEmployeeDAO();
 		int empId = credDAO.tryLogin(user, password);
 		// is employee a manager?
 		if(empId>0)

@@ -1,4 +1,5 @@
 package com.revature.servlets;
+
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -11,21 +12,19 @@ import com.revature.DAO.DAOUtil;
 import com.revature.DAO.EmployeeDAO;
 import com.revature.models.Employee;
 
-/**
- * Servlet implementation class CreateEmployee
- */
-@WebServlet("/employee_new")
-public class CreateEmployee extends HttpServlet {
+@WebServlet("/update_employee")
+public class UpdateEmployeeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		EmployeeDAO empDAO = DAOUtil.getEmployeeDAO();
+		int id =  Integer.parseInt(request.getParameter("id"));
 		String job = request.getParameter("employee_job_title");
 		String fName = request.getParameter("employee_first_name");
 		String lName = request.getParameter("employee_last_name");
 		int reportsTo = Integer.parseInt(request.getParameter("manager_id"));
 		boolean isBoss = request.getParameter("manager_status").equalsIgnoreCase("on")? true:false;
-		System.out.println( isBoss);
+	
 		Employee employee = new Employee(-1, job, fName, lName, reportsTo, isBoss);
 		
 		if(empDAO.addEmployee(employee))

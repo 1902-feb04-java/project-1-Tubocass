@@ -29,7 +29,8 @@ public class HomepageServlet extends HttpServlet {
 		{
 //			if((boolean) session.getAttribute("isManager"))
 			{
-				request.getRequestDispatcher("html/home.html").forward(request, response);
+//				request.getRequestDispatcher("html/home.html").forward(request, response);
+				response.sendRedirect("html/home.html");
 			}
 		}else {
 			response.sendRedirect("html/login.html");
