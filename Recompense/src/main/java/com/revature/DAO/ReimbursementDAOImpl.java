@@ -87,10 +87,32 @@ public class ReimbursementDAOImpl extends CommonDAO implements ReimbursementDAO
 		}
 	}
 
-	public boolean updateRequest(Reimbursement r)
+	public boolean updateRequest(int requestId, int managerId, String status)
 	{
-		// TODO Auto-generated method stub
-		return false;
+		try
+		{
+			connection = DAOUtilities.getConnection();
+			String sql = "UPDATE requests SET status = ? , finalized_by = ?"
+					+"WHERE id = ?";
+			stmt = connection.prepareStatement(sql);
+
+//			status = "'"+status+"'";
+			stmt.setString(1, status);
+			stmt.setInt(2, managerId);
+			stmt.setInt(3, requestId);
+
+			if (stmt.executeUpdate() != 0)
+				return true;
+			else
+				return false;
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+			return false;
+		} finally
+		{
+			closeResources();
+		}
 	}
 
 	public boolean deleteRequestById(int id)
@@ -114,7 +136,8 @@ public class ReimbursementDAOImpl extends CommonDAO implements ReimbursementDAO
 				byte[] image = rs.getBytes("image");// != null ? rs.getBytes("image") : null;
 				Date date = Date.valueOf(rs.getString("date"));
 				String desc = rs.getString("description");
-				Reimbursement request = new Reimbursement(requestId, amount, employee, status, image, date, desc);
+				int finisher = rs.getInt("finalized_by");
+				Reimbursement request = new Reimbursement(requestId, amount, employee, status, image, date, desc, finisher);
 				request.setImageString(image);
 				requests.add(request);
 			}

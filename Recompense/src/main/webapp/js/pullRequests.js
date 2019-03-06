@@ -14,7 +14,7 @@ function pullDown(status)
         if (xhr.readyState == 4) 
         {
         	var data = JSON.parse(xhr.response);
-        	console.log(data);
+//        	console.log(data);
         	
         	for(let item of data)
         	{
@@ -27,10 +27,22 @@ function pullDown(status)
 					<td>${item.amount}</td>
 					<td>${item.description}</td>
 					<td>${item.status}</td>
-					<td><img src="data:image/png;base64,${item.imageString}" width="80" height="120"></td>
-				</tr>`;
+					<td>${item.finalized_by}</td>`
+        			if(item.imageString !=  null)
+        			{
+        				html += `<td><img src="data:image/png;base64,${item.imageString}" width="80" height="120"></td>`
+        			}else{
+        				html += `<td><img src="../resources/ReceiptSwiss.jpg" width="80" height="120"></td>`
+        			}
+        		if(status =="pending")
+        			{
+						html +=
+						`<td><button onclick="FinalizeRequest(${item.id}, 'accepted')" id="accept">Accept</button></td>
+						<td><button onclick="FinalizeRequest(${item.id}, 'rejected')" id="reject">Deny</button></td>`;
+					}
+					html +=`</tr>`;
    
-        		console.log( `${item.id}, ${item.imageString}`);
+//        		console.log( `${item.id}, ${item.imageString}`);
         		table.insertAdjacentHTML('beforeend', html)
         	}
         }
@@ -39,7 +51,24 @@ function pullDown(status)
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.send("status="+status);
 }
+//function test(id, status)
+//{console.log(id, status)}
 
+function FinalizeRequest(id, status)
+{
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = ()=> 
+    {
+        if (xhr.readyState == 4) 
+        {
+        	var data = xhr.response;
+			console.log(data);
+		}
+	}
+	xhr.open('POST','../update_request', true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send("status="+status+"&id="+id);
+}
 function clearTable()
 {
 	console.log(table.children.length);

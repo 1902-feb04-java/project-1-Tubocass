@@ -11,6 +11,6 @@ public interface ReimbursementDAO
 	public Reimbursement getRequestById(int id);
 	
 	public boolean addRequest(Reimbursement r);
-	public boolean updateRequest(Reimbursement r);
+	public boolean updateRequest(int requestId, int managerId, String status);
 	public boolean deleteRequestById(int id);
 }

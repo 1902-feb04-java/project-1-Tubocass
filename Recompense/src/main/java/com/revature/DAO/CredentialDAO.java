@@ -1,17 +1,12 @@
 package com.revature.DAO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.revature.models.Credential;
 
-public class CredentialDAO
+public class CredentialDAO extends CommonDAO
 {
-	Connection connection = null;
-	PreparedStatement stmt = null;
-	
 	public Credential getCred(String user, String password)
 	{
 		Credential cred = null;;
@@ -66,28 +61,5 @@ public class CredentialDAO
 			closeResources();
 		}
 		return id;
-	}
-	
-	private void closeResources()
-	{
-		try
-		{
-			if (stmt != null)
-				stmt.close();
-		} catch (SQLException e)
-		{
-			System.out.println("Could not close statement!");
-			e.printStackTrace();
-		}
-
-		try
-		{
-			if (connection != null)
-				connection.close();
-		} catch (SQLException e)
-		{
-			System.out.println("Could not close connection!");
-			e.printStackTrace();
-		}
 	}
 }

@@ -29,8 +29,9 @@ public class Reimbursement
 	Date date;
 	String description;
 	String imageString;
+	int finalizedBy;
 	
-	public Reimbursement(int id, double money, int empId, String stat, byte[] imgData, Date date, String desc)
+	public Reimbursement(int id, double money, int empId, String stat, byte[] imgData, Date date, String desc, int finisher)
 	{
 		this.id = id;
 		this.amount = money;
@@ -39,6 +40,7 @@ public class Reimbursement
 		this.date = date;
 		this.description = desc;
 		this.image = imgData;
+		this.finalizedBy = finisher;
 	}
 	public Reimbursement(double money, int empId, String desc)
 	{
@@ -77,7 +79,10 @@ public class Reimbursement
 	{
 		return image;
 	}
-	
+	public int getFinisher()
+	{
+		return finalizedBy;
+	}
 	public Date getDate() 
 	{
 		return date;
