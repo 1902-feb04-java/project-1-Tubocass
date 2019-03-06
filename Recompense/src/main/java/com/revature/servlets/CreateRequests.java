@@ -25,11 +25,9 @@ public class CreateRequests extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		int employeeId = -1;
-		employeeId = (int) request.getSession(false).getAttribute("userId"); //Integer.valueOf(request.getParameter("employee_id"));
-		System.out.println(employeeId);
+		employeeId = (int) request.getSession(false).getAttribute("userId");
 		ReimbursementDAO reDAO = DAOUtilities.getReimburseDAO();
 		Double amount = Double.valueOf(request.getParameter("request_amount"));
-//		String status = request.getParameter("request_status");
 		String desc = request.getParameter("request_description");
 		Reimbursement imburse = new Reimbursement(amount, employeeId, desc);
 		Part imageData = request.getPart("image");
@@ -54,15 +52,11 @@ public class CreateRequests extends HttpServlet
 		}
 		
 		if(reDAO.addRequest(imburse))
-		{
-			request.setAttribute("message", "Request added");
-//			request.getRequestDispatcher("/requests_new.html").forward(request, response);
-			response.getWriter().write("Post Heard");
+		{	
+			response.getWriter().write("Added Successfully");
 			System.out.println("Added Successfully");
 		}else  {
-			request.setAttribute("message", "Request was not added");
-//			request.getRequestDispatcher("/requests_new.html").forward(request, response);
-			response.getWriter().write("womp-womp");
+			response.getWriter().write("Request was not added");
 			System.out.println("FAILURE");
 		}
 	}
