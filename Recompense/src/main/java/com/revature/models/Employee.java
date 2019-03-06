@@ -13,7 +13,8 @@ public class Employee
     int id;
     String jobTitle;
     String firstName, lastName;
-    int managerId;
+    int reportsTo;
+    boolean isManager;
 
     static int count = 0;
 
@@ -23,21 +24,22 @@ public class Employee
         this.jobTitle = null;
         this.firstName = null;
         this.lastName = null;
-        this.managerId = -1;
+        this.reportsTo = -1;
     }
-    public Employee(int id, String job, String fName, String lName, int manId)
+    public Employee(int id, String job, String fName, String lName, int manId, boolean isBoss)
     {
         this.id = id;
         this.jobTitle = job;
         this.firstName = fName;
         this.lastName = lName;
-        this.managerId = manId;
+        this.reportsTo = manId;
+        this.isManager = isBoss;
         System.out.println(this.toString());
     }
     @Override
     public String toString()
     {
-        String info = "ID: "+ id+ ", Name: " +firstName+" "+ lastName+", Job: "+jobTitle+", Mananger ID: "+managerId;
+        String info = "ID: "+ id+ ", Name: " +firstName+" "+ lastName+", Job: "+jobTitle+", Mananger ID: "+reportsTo +", is a Manager?: "+isManager;
         return info;
     }
 
@@ -52,7 +54,7 @@ public class Employee
     }
     public void setManagerId(int manId)
     {
-        this.managerId = manId;
+        this.reportsTo = manId;
     }
     public void setJobTitle(String title)
     {
@@ -73,7 +75,7 @@ public class Employee
     }
     public int getManagerId()
     {
-        return this.managerId;
+        return this.reportsTo;
     }
 
     public String getTitle()
@@ -87,5 +89,9 @@ public class Employee
     public String getLastName()
     {
         return this.lastName;
+    }
+    public boolean IsAManager()
+    {
+        return this.isManager;
     }
 }
