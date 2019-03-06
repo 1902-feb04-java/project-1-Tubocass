@@ -57,19 +57,45 @@ public class EmployeeDAOImpl extends CommonDAO implements EmployeeDAO
 		return employees;
 	}
 	@Override
-	public void updateEmployee(Employee employee) {
+	public boolean updateEmployee(Employee employee) {
+		return false;
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void addEmployee(Employee employee) {
-		// TODO Auto-generated method stub
-		
+	public boolean addEmployee(Employee e) 
+	{
+		//id, job_title, first_name, last_name, reports_to, ismanager
+		try {
+			connection = DAOUtilities.getConnection();
+			String sql = "INSERT INTO employees (job_title, first_name, last_name, reports_to, ismanager)"
+					+"VALUES(?,?,?,?,?)";
+			stmt = connection.prepareStatement(sql);
+			
+			stmt.setString(1, e.getTitle());
+			stmt.setString(2, e.getFirstName());
+			stmt.setString(3, e.getLastName());
+			stmt.setInt(4, e.getManagerId());
+			stmt.setBoolean(5, e.IsAManager());
+			
+			if (stmt.executeUpdate() != 0)
+				return true;
+			else
+				return false;
+		} catch (SQLException ex)
+		{
+			ex.printStackTrace();
+			return false;
+		} finally
+		{
+			closeResources();
+		}
 	}
 
 	@Override
-	public void deleteEmployee(int id) {
+	public boolean deleteEmployee(int id) {
+		return false;
 		// TODO Auto-generated method stub
 		
 	}
