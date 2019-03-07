@@ -6,19 +6,20 @@
 </head>
 <body>
 
-<form method="POST" action="../employee_new" id="create_employee">
+<form method="POST" action="../employee_crud" id="create_employee">
     <input type="text" id="empJobTitle" name="employee_job_title" placeholder="Job Title"><br>
     <input type="text" id="empFirstName" name="employee_first_name" placeholder="First Name"><br>
     <input type="text" id="empLastName" name="employee_last_name" placeholder="Last Name"><br>
     <input type="text" id="empManager" name="manager_id" placeholder="Manager's ID"><br>
     <label>Manager:</label>
-    <input type="checkbox" name="manager_status"><br>
+    <input type="checkbox" name="manager_status" value="is_manager" ><br>
     <br>
     <br>
     <label>Username:</label>
     <input type="text" name="user_name"><br>
-     <label>Password:</label>
-     <input type="password" name="password"><br>
+    <label>Password:</label>
+    <input type="password" name="password"><br>
+    <input type="hidden" name="crud" value="create">
     <input type="submit" id="submitButton" value="Submit">
 </form>
 

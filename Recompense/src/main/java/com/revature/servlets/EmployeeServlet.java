@@ -14,23 +14,75 @@ import com.revature.DAO.DAOUtil;
 import com.revature.DAO.EmployeeDAO;
 import com.revature.models.Employee;
 
-@WebServlet("/pull_employees")
+@WebServlet({"/employee_crud","/EmployeeServlet"})
 public class EmployeeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-   
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+       
+	protected Employee ParseEmployee(HttpServletRequest request)
 	{
-		String employee = request.getParameter("who");
-		
+		String job = request.getParameter("employee_job_title");
+		String fName = request.getParameter("employee_first_name");
+		String lName = request.getParameter("employee_last_name");
+		int reportsTo = Integer.parseInt(request.getParameter("manager_id"));
+		boolean isBoss = request.getParameter("manager_status") != null? true:false;
+		Employee employee = new Employee(-1, job, fName, lName, reportsTo, isBoss);
+		return employee;
+	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String crud = request.getParameter("crud");
 		EmployeeDAO empDAO = DAOUtil.getEmployeeDAO();
-		List<Employee> employees = empDAO.getAllEmployees();
+		Employee emp;
 		
-		String json = new Gson().toJson(employees);
-		response.getWriter().write(json);
+		switch(crud)
+		{
+			case "create":
+			{
+				emp = this.ParseEmployee(request);
+				if(empDAO.addEmployee(emp))
+				{	
+					response.getWriter().write("Added Successfully");
+					System.out.println("Added Successfully");
+				}else  {
+					response.getWriter().write("Employee was not added");
+					System.out.println("FAILURE");
+				}
+				break;
+			}
+			case "read":
+			{
+				String who = request.getParameter("who");
+				if(who.equals("all")) 
+				{
+					List<Employee> employees = empDAO.getAllEmployees();
+					
+					String json = new Gson().toJson(employees);
+					response.getWriter().write(json);
+				}else {
+					emp = empDAO.getEmployeeById(Integer.parseInt(who));
+					String json = new Gson().toJson(emp);
+					response.getWriter().write(json);
+				}
+				
+				break;
+			}
+			case "update":
+			{
+				emp = this.ParseEmployee(request);
+				if(empDAO.updateEmployee(emp))
+				{	
+					response.getWriter().write("Updated Successfully");
+					System.out.println("Updated Successfully");
+				}else  {
+					response.getWriter().write("Employee was not updated");
+					System.out.println("FAILURE");
+				}
+				break;
+			}
+			case "delete":
+			{
+				break;
+			}
+		}
 	}
 
 }
