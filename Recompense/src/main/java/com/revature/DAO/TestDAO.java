@@ -17,7 +17,7 @@ public class TestDAO
 //		List<Reimbursement> requests = reDAO.getAllRequests();
 //		Reimbursement req = reDAO.getRequestById(24);
 		Employee emp = empDAO.getEmployeeByName("Peter", "Townshend");
-		emp.setJobTitle("Senior Pinball Wizard");
+		
 //		System.out.println(req.toString());
 		System.out.println(emp.toString());
 		System.out.println(empDAO.updateEmployee(emp));

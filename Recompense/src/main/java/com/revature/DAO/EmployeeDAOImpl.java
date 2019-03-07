@@ -36,7 +36,7 @@ public class EmployeeDAOImpl extends CommonDAO implements EmployeeDAO
 		try {
 			String base = "SELECT * FROM employees ";
 			connection = DAOUtil.getConnection();
-			stmt = connection.prepareStatement(base+sql);
+			stmt = connection.prepareStatement(base+sql); // SELECT and WHERE clauses combined
 			
 			ResultSet rs = stmt.executeQuery();
 			//id, job_title, first_name, last_name, reports_to, ismanager

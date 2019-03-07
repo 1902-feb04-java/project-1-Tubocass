@@ -48,27 +48,6 @@ public class Employee
         return count++;
     }
 
-    public void setId(int id)
-    {
-        this.id = id;
-    }
-    public void setManagerId(int manId)
-    {
-        this.reportsTo = manId;
-    }
-    public void setJobTitle(String title)
-    {
-        this.jobTitle = title;
-    }
-    public void setFirstName(String first)
-    {
-        this.firstName = first;
-    }
-    public void setLastName(String last)
-    {
-        this.lastName = last;
-    }
-
     public int getId()
     {
         return this.id;

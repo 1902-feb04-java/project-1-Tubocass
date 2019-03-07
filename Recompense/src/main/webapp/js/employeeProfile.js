@@ -19,7 +19,7 @@ function pullDown(who)
 	        	for(let item of data)
 	        	{
 	        		person = html(item);
-	        		table.insertAdjacentHTML('beforeend', person)
+	        		table.insertAdjacentHTML('beforeend', person) 
 	        	}
     		}else {
     			person = html(data);
@@ -28,11 +28,11 @@ function pullDown(who)
         }
     };
     xhr.open('POST','../EmployeeServlet', true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.send("who="+who+"&crud=read");
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); // we're using form data for our custom properties
+    xhr.send("who="+who+"&crud=read"); // Send some properties that specify which crud operation we want, and which employee(s) we want
 }
 
-var html = (item) => {
+var html = (item) => { //makes a table row with data
 	let string = `
 		<tr>
 			<td style="text-align: center">${item.id}</td>
@@ -43,7 +43,7 @@ var html = (item) => {
 		</tr>`;
 	return string;
 }
-function updateTable(){
+function updateTable(){ // makes a row of input fields loaded with current employee's data
 	clearTable();
 	
 	let inputTable = `
@@ -58,7 +58,7 @@ function updateTable(){
 	table.insertAdjacentHTML('beforeend', inputTable);
 }
 
-function clearTable()
+function clearTable() // clears our table rows
 {
 	console.log(table.children.length);
 	let children = table.children;

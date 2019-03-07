@@ -1,6 +1,6 @@
 let table = document.getElementById("response-table");
 
-document.getElementById('populate_pending').addEventListener('click', () => pullDown('pending'));
+document.getElementById('populate_pending').addEventListener('click', () => pullDown('pending')); //different status conditions
 document.getElementById('populate_accepted').addEventListener('click', () => pullDown('accepted'));
 document.getElementById('populate_rejected').addEventListener('click', () => pullDown('rejected'));
 
@@ -28,13 +28,13 @@ function pullDown(status)
 					<td>${item.description}</td>
 					<td>${item.status}</td>
 					<td>${item.finalized_by}</td>`
-        			if(item.imageString !=  null)
+        			if(item.imageString !=  null) //add stored image
         			{
         				html += `<td><img src="data:image/png;base64,${item.imageString}" width="80" height="120"></td>`
-        			}else{
+        			}else{ //adds default image
         				html += `<td><img src="../resources/ReceiptSwiss.jpg" width="80" height="120"></td>`
         			}
-        		if(status =="pending")
+        		if(status =="pending") // add buttons to accept or deny a pending request
         			{
 						html +=
 						`<td><button onclick="FinalizeRequest(${item.id}, 'accepted')" id="accept">Accept</button></td>
@@ -47,14 +47,14 @@ function pullDown(status)
         	}
         }
     };
-    xhr.open('POST','../past_requests', true);
+    xhr.open('POST','../reimbursement_crud', true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.send("status="+status);
+    xhr.send("status="+status+"&crud=read");
 }
 //function test(id, status)
 //{console.log(id, status)}
 
-function FinalizeRequest(id, status)
+function FinalizeRequest(id, status)//updates the request with new approval status and who accepted/rejected it
 {
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = ()=> 
@@ -65,11 +65,11 @@ function FinalizeRequest(id, status)
 			console.log(data);
 		}
 	}
-	xhr.open('POST','../update_request', true);
+	xhr.open('POST','../reimbursement_crud', true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.send("status="+status+"&id="+id);
+    xhr.send("status="+status+"&id="+id+"&crud=update");
 }
-function clearTable()
+function clearTable() // clears table of nodes
 {
 	console.log(table.children.length);
 	let children = table.children;
