@@ -29,7 +29,7 @@ public class EmployeeDAOImpl extends CommonDAO implements EmployeeDAO
 		return getAllEmployees("");
 	}
 
-	public List<Employee> getAllEmployees(String sql) 
+	protected List<Employee> getAllEmployees(String sql) 
 	{
 		List<Employee> employees = new ArrayList<Employee>();
 		

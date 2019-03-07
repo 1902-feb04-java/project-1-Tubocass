@@ -27,7 +27,7 @@ public class HomepageServlet extends HttpServlet {
 		String user = (String) session.getAttribute("user");
 		if(user != null)
 		{
-//			if((boolean) session.getAttribute("isManager"))
+			if((boolean) session.getAttribute("isManager"))
 			{
 //				request.getRequestDispatcher("html/home.html").forward(request, response);
 				response.sendRedirect("html/home.html");
