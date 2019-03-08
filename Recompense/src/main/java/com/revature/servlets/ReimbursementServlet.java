@@ -17,7 +17,9 @@ import javax.servlet.http.Part;
 
 import com.google.gson.Gson;
 import com.revature.DAO.DAOUtil;
+import com.revature.DAO.EmployeeDAO;
 import com.revature.DAO.ReimbursementDAO;
+import com.revature.models.Employee;
 import com.revature.models.Reimbursement;
 
 @WebServlet("/reimbursement_crud")
@@ -85,10 +87,23 @@ public class ReimbursementServlet extends HttpServlet
 				case "read":
 				{
 					String reqStatus = request.getParameter("status");
+					String who = request.getParameter("who");
 					//Add parameter to get all for a specific employee
 					List<Reimbursement> requests = new ArrayList<Reimbursement>();
-					requests = reDAO.getAllRequestsByStatus(reqStatus);
-					
+					System.out.println(who);
+					if(who.equals("all")) 
+					{
+						requests = reDAO.getAllRequestsByStatus(reqStatus);
+						
+					}else if(who.equals("current"))
+					{
+						requests = reDAO.getAllRequestsByStatusAndEmployee((int) session.getAttribute("userId"),reqStatus);
+					}else {
+//						EmployeeDAO empDAO = DAOUtil.getEmployeeDAO();
+//						Employee emp = empDAO.getEmployeeByLastName(who);
+//						requests = reDAO.getAllRequestsByStatusAndEmployee(emp.getId(),reqStatus);
+						requests = reDAO.getAllRequestsByStatusAndEmployee(Integer.parseInt(who),reqStatus);
+					}
 					String json = new Gson().toJson(requests);
 					response.getWriter().write(json);
 					break;
