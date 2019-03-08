@@ -36,13 +36,17 @@ public class LoginServlet extends HttpServlet
 		// is employee a manager?
 		if(empId>0)
 		{
-			Employee emploee = empDAO.getEmployeeById(empId);
+			Employee employee = empDAO.getEmployeeById(empId);
 			session.setAttribute("user", user);
 			session.setAttribute("userId", empId);
-			session.setAttribute("isManager", emploee.IsAManager());
-			System.out.println(emploee.IsAManager());
-//			response.sendRedirect("html/home.html");
-			request.getRequestDispatcher("/homepage").forward(request, response);
+			session.setAttribute("isManager", employee.IsAManager());
+			System.out.println( "user"+session.getAttribute("userId"));
+			if(employee.IsAManager())
+			{
+				response.sendRedirect("html/manager_home.html");
+			}else {
+				response.sendRedirect("html/employee_home.html");
+			}
 		}else {
 			response.sendRedirect("html/login.html");
 			response.getWriter().write("failure");

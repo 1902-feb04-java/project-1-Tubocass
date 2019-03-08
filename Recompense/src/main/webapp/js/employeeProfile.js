@@ -1,8 +1,10 @@
 let table = document.getElementById("employee-table");
-
-document.getElementById('populate_page').addEventListener('click', () => pullDown(1));
+let employeeName = document.getElementById("input_employee_name");
+document.getElementById('populate_page').addEventListener('click', () => pullDown('all'));
+document.getElementById('pull_employee').addEventListener('click', () => pullDown(employeeName.value));
 document.getElementById('update').addEventListener('click', updateTable);
 var data;
+document.addEventListener('DOMContentLoaded', () => pullDown('Townshend'))
 function pullDown(who)
 {
 	clearTable();
@@ -50,12 +52,43 @@ function updateTable(){ // makes a row of input fields loaded with current emplo
 		<tr>
 			<td><input type="text" id="empJobTitle" name="employee_job_title" value="${data.jobTitle}"</td>
 			<td><input type="text" id="empFirstName" name="employee_first_name" value="${data.firstName}"></td>
-			<td> <input type="text" id="empLastName" name="employee_last_name" value="${data.lastName}"></td>
+			<td><input type="text" id="empLastName" name="employee_last_name" value="${data.lastName}"></td>
 			<td><input type="text" id="empManager" name="manager_id" value="${data.reportsTo}"></td>
 			<td><label>Manager:</label>
-			<input type="checkbox" name="manager_status" value="is_manager"`; if(data.isManager){inputTable += `checked="true"`;} inputTable+= `></td>
+			<input id="managerStatus" type="checkbox" name="manager_status" value="is_manager"`;
+			if(data.isManager){inputTable += `checked="true"`;} inputTable+= `></td>
+			<td><button id="submitButton" value="Submit" onclick="updateEmployee()">Submit<button> </td
 		</tr>`;
 	table.insertAdjacentHTML('beforeend', inputTable);
+}
+function updateEmployee()
+{
+	let job =  document.getElementById("empJobTitle").value;
+	let fName =  document.getElementById("empFirstName").value;
+	let lName =  document.getElementById("empLastName").value;
+	let reportsTo =  document.getElementById("empManager").value;
+	let isManager =  document.getElementById("managerStatus").value;
+	let fd = new FormData();
+	fd.append('crud','update');
+	fd.append('employee_job_title',job);
+	fd.append('employee_first_name',fName);
+	fd.append('employee_last_name',lName);
+	fd.append('manager_id',reportsTo);
+	fd.append('manager_status',isManager);
+
+	console.log(fd);
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = ()=> 
+    {
+        if (xhr.readyState == 4) 
+        {
+        	var data = xhr.response;
+			console.log(data);
+		}
+	}
+	xhr.open('POST','../employee_crud', true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send(fd);
 }
 
 function clearTable() // clears our table rows

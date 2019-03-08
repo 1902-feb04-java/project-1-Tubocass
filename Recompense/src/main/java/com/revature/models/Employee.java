@@ -42,10 +42,10 @@ public class Employee
         String info = "ID: "+ id+ ", Name: " +firstName+" "+ lastName+", Job: "+jobTitle+", Mananger ID: "+reportsTo +", is a Manager?: "+isManager;
         return info;
     }
-
-    static int nextId()
+    
+    public void setId(int num)
     {
-        return count++;
+    	this.id = num;
     }
 
     public int getId()

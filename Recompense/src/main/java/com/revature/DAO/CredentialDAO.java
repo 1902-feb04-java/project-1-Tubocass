@@ -36,7 +36,7 @@ public class CredentialDAO extends CommonDAO
 	
 	public int tryLogin(String user, String password)
 	{
-		int id = 0;
+		int id = -1;
 		try
 		{
 			connection = DAOUtil.getConnection();
@@ -51,7 +51,7 @@ public class CredentialDAO extends CommonDAO
 			{
 				id = rs.getInt(1);
 			}
-			System.out.println(id);
+//			System.out.println(id);
 			
 		} catch (SQLException e)
 		{

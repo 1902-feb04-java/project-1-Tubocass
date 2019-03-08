@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.revature.DAO.DAOUtil;
@@ -32,6 +33,8 @@ public class EmployeeServlet extends HttpServlet {
 		String crud = request.getParameter("crud");
 		EmployeeDAO empDAO = DAOUtil.getEmployeeDAO();
 		Employee emp;
+		HttpSession session = request.getSession(false);
+		int id = (int) session.getAttribute("userId");
 		
 		switch(crud)
 		{
@@ -57,8 +60,14 @@ public class EmployeeServlet extends HttpServlet {
 					
 					String json = new Gson().toJson(employees);
 					response.getWriter().write(json);
+				}else if(who.equals("current"))
+				{
+					System.out.println(id);
+					emp = empDAO.getEmployeeById(id);
+					String json = new Gson().toJson(emp);
+					response.getWriter().write(json);
 				}else {
-					emp = empDAO.getEmployeeById(Integer.parseInt(who));
+					emp = empDAO.getEmployeeByLastName(who);
 					String json = new Gson().toJson(emp);
 					response.getWriter().write(json);
 				}
@@ -68,6 +77,7 @@ public class EmployeeServlet extends HttpServlet {
 			case "update":
 			{
 				emp = this.ParseEmployee(request);
+				emp.setId(id);
 				if(empDAO.updateEmployee(emp))
 				{	
 					response.getWriter().write("Updated Successfully");

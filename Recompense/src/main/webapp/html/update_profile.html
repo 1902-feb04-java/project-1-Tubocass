@@ -5,6 +5,39 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+ <form method="POST" action="../employee_crud" id="update_employee">
+    <input type="text" id="empJobTitle" name="employee_job_title" placeholder="Job Title"><br>
+    <input type="text" id="empFirstName" name="employee_first_name" placeholder="First Name"><br>
+    <input type="text" id="empLastName" name="employee_last_name" placeholder="Last Name"><br>
+    <input type="text" id="empManager" name="manager_id" placeholder="Manager's ID"><br>
+    <label>Manager:</label>
+    <input type="checkbox" name="manager_status" value="is_manager" ><br>
+   	<br>
+    <input type="hidden" name="crud" value="update">
+    <input type="submit" id="submitButton" value="Submit">
+</form>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', () => pullDown('current'))
+function pullDown(who)
+{
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = ()=> 
+    {
+        if (xhr.readyState == 4) 
+        {
+        	data = JSON.parse(xhr.response);
+        	console.log(data);
+        	document.getElementById("empJobTitle").value = data.jobTitle;
+        	document.getElementById("empFirstName").value = data.firstName;
+        	document.getElementById("empLastName").value = data.lastName;
+        	document.getElementById("empManager").value = data.reportsTo;
+        	document.getElementById("managerStatus").checked = data.isManager;
+        }
+    };
+    xhr.open('POST','../EmployeeServlet', true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); // we're using form data for our custom properties
+    xhr.send("who="+who+"&crud=read"); // Send some properties that specify which crud operation we want, and which employee(s) we want
+}
+</script>
 </body>
 </html>

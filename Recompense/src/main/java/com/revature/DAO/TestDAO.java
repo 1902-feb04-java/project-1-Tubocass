@@ -16,7 +16,7 @@ public class TestDAO
 //		List<Reimbursement> requests = reDAO.getAllRequestsByStatus("pending");
 //		List<Reimbursement> requests = reDAO.getAllRequests();
 //		Reimbursement req = reDAO.getRequestById(24);
-		Employee emp = empDAO.getEmployeeByName("Peter", "Townshend");
+		Employee emp = empDAO.getEmployeeByLastName("Townshend");
 		
 //		System.out.println(req.toString());
 		System.out.println(emp.toString());

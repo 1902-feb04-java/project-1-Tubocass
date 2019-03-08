@@ -17,10 +17,10 @@ public class EmployeeDAOImpl extends CommonDAO implements EmployeeDAO
 	}
  
 	@Override
-	public Employee getEmployeeByName(String fName, String lName) 
+	public Employee getEmployeeByLastName(String lName) 
 	{
-		String fn = "'"+fName +"'", ln = "'"+lName +"'"; 
-		String sql = String.format("WHERE first_name = %s AND last_name = %s", fn, ln);
+		String ln = "'"+lName +"'"; 
+		String sql = String.format("WHERE last_name = %s", ln);
 		return getAllEmployees(sql).get(0);
 	}
 	@Override

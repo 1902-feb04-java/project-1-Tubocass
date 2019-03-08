@@ -7,7 +7,7 @@ import com.revature.models.Employee;
 public interface EmployeeDAO
 {
 	public Employee getEmployeeById(int id);
-	public Employee getEmployeeByName(String fName, String lName);
+	public Employee getEmployeeByLastName(String lName);
 	public List<Employee> getAllEmployees();
 	public boolean updateEmployee(Employee employee);
 	public boolean addEmployee(Employee employee);
