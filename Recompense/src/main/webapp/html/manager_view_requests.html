@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" media="screen" href="../css/style.css" />
+</head>
+<body>
+    <button id="populate_pending">View All Pending Requests</button>   
+    <button id="populate_accepted">View All Accepted Requests</button>   
+    <button id="populate_rejected">View All Rejected Requests</button>
+    
+   <br>
+ <input type="text" name="name" id="input_employee_name">
+ <br>
+ <button id="ind_pending">View Pending Requests</button>   
+    <button id="ind_accepted">View Accepted Requests</button>   
+    <button id="ind_rejected">View Rejected Requests</button>
+  <div class="response-block">
+  <table>
+		<thead>
+			<tr>
+				<th>ID#</th>
+				<th>Date</th>
+				<th>Employee</th>
+				<th>Amount</th>
+				<th>Comments</th>
+				<th>Status</th>
+				<th>Image</th>
+			
+		</thead>
+		<tbody id="response-table">
+		</tbody>
+	</table>
+  </div>
+
+  <script src="../js/pullRequests.js?new"></script>
+</body>
+</html>

@@ -1,11 +1,11 @@
 let table = document.getElementById("response-table");
 
-document.getElementById('populate_pending').addEventListener('click', () => pullDown('pending')); //different status conditions
-document.getElementById('populate_accepted').addEventListener('click', () => pullDown('accepted'));
-document.getElementById('populate_rejected').addEventListener('click', () => pullDown('rejected'));
+document.getElementById('populate_pending').addEventListener('click', () => pullDown('all,' ,'pending')); //different status conditions
+document.getElementById('populate_accepted').addEventListener('click', () => pullDown('all,', 'accepted'));
+document.getElementById('populate_rejected').addEventListener('click', () => pullDown('all,', 'rejected'));
 
 
-function pullDown(status)
+function pullDown(who, status)
 {
 	clearTable();
     var xhr = new XMLHttpRequest();
@@ -49,7 +49,7 @@ function pullDown(status)
     };
     xhr.open('POST','../reimbursement_crud', true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.send("status="+status+"&crud=read");
+    xhr.send("status="+status+"&crud=read&who="+who);
 }
 //function test(id, status)
 //{console.log(id, status)}
