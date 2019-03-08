@@ -2,9 +2,9 @@ let table = document.getElementById("employee-table");
 let employeeName = document.getElementById("input_employee_name");
 document.getElementById('populate_page').addEventListener('click', () => pullDown('all'));
 document.getElementById('pull_employee').addEventListener('click', () => pullDown(employeeName.value));
-document.getElementById('update').addEventListener('click', updateTable);
+//document.getElementById('update').addEventListener('click', updateTable);
 var data;
-document.addEventListener('DOMContentLoaded', () => pullDown('Townshend'))
+//document.addEventListener('DOMContentLoaded', () => pullDown('current'))
 function pullDown(who)
 {
 	clearTable();
@@ -14,7 +14,7 @@ function pullDown(who)
         if (xhr.readyState == 4) 
         {
         	data = JSON.parse(xhr.response);
-        	console.log(data);
+        	console.log('data'+data);
         	let person;
         	if(who =='all')
     		{
@@ -34,7 +34,7 @@ function pullDown(who)
     xhr.send("who="+who+"&crud=read"); // Send some properties that specify which crud operation we want, and which employee(s) we want
 }
 
-var html = (item) => { //makes a table row with data
+function html(item) { //makes a table row with data
 	let string = `
 		<tr>
 			<td style="text-align: center">${item.id}</td>

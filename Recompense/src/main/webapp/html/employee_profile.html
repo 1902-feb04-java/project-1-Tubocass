@@ -6,11 +6,8 @@
 <link rel="stylesheet" type="text/css" media="screen" href="../css/style.css" />
 </head>
 <body>
-<button id="populate_page" >Pull All</button>
-<br>
-<button id="pull_employee" >Pull</button>
- <input type="text" name="name" id="input_employee_name">
-<button id="update" >Update</button>
+<a href="./update_profile.html">Update Profile</a>
+<!-- <button id="update" >Update</button> -->
   <div class="response-block">
   <table>
 		<thead>
@@ -26,7 +23,48 @@
 	</table>
   </div>
   
-  <script src="../js/employeeProfile.js?new"></script>
+  <script>
+  pullDown('current');
+  let table = document.getElementById("employee-table");
+  function pullDown(who)
+  {
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = ()=> 
+      {
+          if (xhr.readyState == 4) 
+          {
+          	data = JSON.parse(xhr.response);
+          	console.log(data);
+          	let person;
+          	if(who =='all')
+      		{
+  	        	for(let item of data)
+  	        	{
+  	        		person = html(item);
+  	        		table.insertAdjacentHTML('beforeend', person) 
+  	        	}
+      		}else {
+      			person = html(data);
+      			table.insertAdjacentHTML('beforeend', person)
+      		}
+          }
+      };
+      xhr.open('POST','../EmployeeServlet', true);
+      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); // we're using form data for our custom properties
+      xhr.send("who="+who+"&crud=read"); // Send some properties that specify which crud operation we want, and which employee(s) we want
+  }
+  var html = (item) => { //makes a table row with data
+		let string = `
+			<tr>
+				<td style="text-align: center">${item.id}</td>
+				<td>${item.firstName} ${item.lastName}</td>
+				<td>${item.jobTitle}</td>
+				<td>${item.reportsTo}</td>
+				<td>${item.isManager}</td>
+			</tr>`;
+		return string;
+	}
+</script>
   
   </body>
 </html>
