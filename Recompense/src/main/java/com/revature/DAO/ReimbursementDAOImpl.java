@@ -40,7 +40,7 @@ public class ReimbursementDAOImpl extends CommonDAO implements ReimbursementDAO
 	}
 	public List<Reimbursement> getAllRequestsByStatusAndEmployee(int employeeId, String status)
 	{
-		String sql = String.format("WHERE employee_id = %d AND status = %s", employeeId, status);
+		String sql = String.format("WHERE employee_id = %d AND status = '%s'", employeeId, status);
 
 		return getAllRequests(sql);
 	}

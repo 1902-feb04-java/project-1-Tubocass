@@ -1,12 +1,14 @@
 let table = document.getElementById("response-table");
-
-document.getElementById('populate_pending').addEventListener('click', () => pullDown('current' ,'pending')); //different status conditions
-document.getElementById('populate_accepted').addEventListener('click', () => pullDown('current', 'accepted'));
-document.getElementById('populate_rejected').addEventListener('click', () => pullDown('current', 'rejected'));
+let employeeName = document.getElementById("input_employee_name");
+document.getElementById('populate_pending').addEventListener('click', () => pullDown(employeeName.value ,'pending')); //different status conditions
+document.getElementById('populate_accepted').addEventListener('click', () => pullDown(employeeName.value, 'accepted'));
+document.getElementById('populate_rejected').addEventListener('click', () => pullDown(employeeName.value, 'rejected'));
 
 
 function pullDown(who, status)
 {
+	if(who=='')
+		who='current';
 	clearTable();
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = ()=> 
@@ -54,21 +56,21 @@ function pullDown(who, status)
 //function test(id, status)
 //{console.log(id, status)}
 
-//function FinalizeRequest(id, status)//updates the request with new approval status and who accepted/rejected it
-//{
-//	var xhr = new XMLHttpRequest();
-//	xhr.onreadystatechange = ()=> 
-//    {
-//        if (xhr.readyState == 4) 
-//        {
-//        	var data = xhr.response;
-//			console.log(data);
-//		}
-//	}
-//	xhr.open('POST','../reimbursement_crud', true);
-//    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-//    xhr.send("status="+status+"&id="+id+"&crud=update");
-//}
+function FinalizeRequest(id, status)//updates the request with new approval status and who accepted/rejected it
+{
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = ()=> 
+    {
+        if (xhr.readyState == 4) 
+        {
+        	var data = xhr.response;
+			console.log(data);
+		}
+	}
+	xhr.open('POST','../reimbursement_crud', true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send("status="+status+"&id="+id+"&crud=update");
+}
 function clearTable() // clears table of nodes
 {
 	console.log(table.children.length);

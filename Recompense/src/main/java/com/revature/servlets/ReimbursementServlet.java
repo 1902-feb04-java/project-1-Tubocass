@@ -88,24 +88,32 @@ public class ReimbursementServlet extends HttpServlet
 				{
 					String reqStatus = request.getParameter("status");
 					String who = request.getParameter("who");
-					//Add parameter to get all for a specific employee
-					List<Reimbursement> requests = new ArrayList<Reimbursement>();
-					System.out.println(who);
+					System.out.println("who and stat "+who.equals("all"));
+//					response.getWriter().write(json);
 					if(who.equals("all")) 
 					{
+						
+						//Add parameter to get all for a specific employee
+						List<Reimbursement> requests = new ArrayList<Reimbursement>();
 						requests = reDAO.getAllRequestsByStatus(reqStatus);
 						
-					}else if(who.equals("current"))
-					{
-						requests = reDAO.getAllRequestsByStatusAndEmployee((int) session.getAttribute("userId"),reqStatus);
-					}else {
-//						EmployeeDAO empDAO = DAOUtil.getEmployeeDAO();
-//						Employee emp = empDAO.getEmployeeByLastName(who);
-//						requests = reDAO.getAllRequestsByStatusAndEmployee(emp.getId(),reqStatus);
-						requests = reDAO.getAllRequestsByStatusAndEmployee(Integer.parseInt(who),reqStatus);
+						String json = new Gson().toJson(requests);
+						response.getWriter().write(json);
+						
 					}
-					String json = new Gson().toJson(requests);
-					response.getWriter().write(json);
+					else if(who.equals("current"))
+					{
+						List<Reimbursement> requests = new ArrayList<Reimbursement>();
+						requests = reDAO.getAllRequestsByStatusAndEmployee((int) session.getAttribute("userId"),reqStatus);
+						String json = new Gson().toJson(requests);
+						response.getWriter().write(json);
+					}else {
+						List<Reimbursement> requests = new ArrayList<Reimbursement>();
+						requests = reDAO.getAllRequestsByStatusAndEmployee(Integer.parseInt(who),reqStatus);
+						String json = new Gson().toJson(requests);
+						response.getWriter().write(json);
+					}
+			
 					break;
 				}
 				case "update":
