@@ -65,6 +65,7 @@ function FinalizeRequest(id, status)//updates the request with new approval stat
         {
         	var data = xhr.response;
 			console.log(data);
+			pullDown(employeeName.value ,'pending')
 		}
 	}
 	xhr.open('POST','../reimbursement_crud', true);
