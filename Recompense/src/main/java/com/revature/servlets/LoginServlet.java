@@ -26,8 +26,15 @@ public class LoginServlet extends HttpServlet
 		if(user == null)
 		{
 			user = request.getParameter("user");
+		}else {
+			String newUser = request.getParameter("user");
+			if(!user.equals(newUser))
+			{
+//				session.invalidate();
+				user = newUser;
+			}
 		}
-//		user = request.getParameter("user");
+		
 		String password = request.getParameter("password");
 		
 		CredentialDAO credDAO = new CredentialDAO();
@@ -40,11 +47,13 @@ public class LoginServlet extends HttpServlet
 			session.setAttribute("user", user);
 			session.setAttribute("userId", empId);
 			session.setAttribute("isManager", employee.IsAManager());
+			System.out.println(empId);
 			System.out.println( "user"+session.getAttribute("userId"));
 			if(employee.IsAManager())
 			{
 				response.sendRedirect("html/manager_home.html");
 			}else {
+				System.out.println(employee.toString());
 				response.sendRedirect("html/employee_home.html");
 			}
 		}else {

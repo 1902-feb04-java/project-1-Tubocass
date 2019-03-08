@@ -34,12 +34,12 @@ function pullDown(who, status)
         			}else{ //adds default image
         				html += `<td><img src="../resources/ReceiptSwiss.jpg" width="80" height="120"></td>`
         			}
-        		if(status =="pending") // add buttons to accept or deny a pending request
-        			{
-						html +=
-						`<td><button onclick="FinalizeRequest(${item.id}, 'accepted')" id="accept">Accept</button></td>
-						<td><button onclick="FinalizeRequest(${item.id}, 'rejected')" id="reject">Deny</button></td>`;
-					}
+//        		if(status =="pending") // add buttons to accept or deny a pending request
+//        			{
+//						html +=
+//						`<td><button onclick="FinalizeRequest(${item.id}, 'accepted')" id="accept">Accept</button></td>
+//						<td><button onclick="FinalizeRequest(${item.id}, 'rejected')" id="reject">Deny</button></td>`;
+//					}
 					html +=`</tr>`;
    
 //        		console.log( `${item.id}, ${item.imageString}`);
