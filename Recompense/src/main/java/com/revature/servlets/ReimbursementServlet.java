@@ -90,29 +90,20 @@ public class ReimbursementServlet extends HttpServlet
 					String who = request.getParameter("who");
 					System.out.println("who and stat "+who.equals("all"));
 //					response.getWriter().write(json);
+					List<Reimbursement> requests = new ArrayList<Reimbursement>();
 					if(who.equals("all")) 
 					{
-						
 						//Add parameter to get all for a specific employee
-						List<Reimbursement> requests = new ArrayList<Reimbursement>();
 						requests = reDAO.getAllRequestsByStatus(reqStatus);
-						
-						String json = new Gson().toJson(requests);
-						response.getWriter().write(json);
-						
 					}
 					else if(who.equals("current"))
 					{
-						List<Reimbursement> requests = new ArrayList<Reimbursement>();
 						requests = reDAO.getAllRequestsByStatusAndEmployee((int) session.getAttribute("userId"),reqStatus);
-						String json = new Gson().toJson(requests);
-						response.getWriter().write(json);
 					}else {
-						List<Reimbursement> requests = new ArrayList<Reimbursement>();
 						requests = reDAO.getAllRequestsByStatusAndEmployee(Integer.parseInt(who),reqStatus);
-						String json = new Gson().toJson(requests);
-						response.getWriter().write(json);
 					}
+					String json = new Gson().toJson(requests);
+					response.getWriter().write(json);
 			
 					break;
 				}

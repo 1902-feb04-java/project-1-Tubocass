@@ -54,23 +54,20 @@ public class EmployeeServlet extends HttpServlet {
 			case "read":
 			{
 				String who = request.getParameter("who");
+				String json;
 				if(who.equals("all")) 
 				{
 					List<Employee> employees = empDAO.getAllEmployees();
-					
-					String json = new Gson().toJson(employees);
-					response.getWriter().write(json);
+					json = new Gson().toJson(employees);
 				}else if(who.equals("current"))
 				{
-					System.out.println(id);
 					emp = empDAO.getEmployeeById(id);
-					String json = new Gson().toJson(emp);
-					response.getWriter().write(json);
+					json = new Gson().toJson(emp);
 				}else {
 					emp = empDAO.getEmployeeByLastName(who);
-					String json = new Gson().toJson(emp);
-					response.getWriter().write(json);
+					json = new Gson().toJson(emp);
 				}
+				response.getWriter().write(json);
 				
 				break;
 			}
