@@ -1,5 +1,14 @@
 package com.revature.models;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "employees")
 public class Employee
 {
     /*
@@ -9,11 +18,13 @@ public class Employee
 	last_name VARCHAR(50),
 	reports_to INTEGER REFERENCES employees(id)
     */
-
+	@Id
+//	@GeneratedValue(strategy=GenerationType.SEQUENCE)
     int id;
     String jobTitle;
     String firstName, lastName;
     int reportsTo;
+    @Column(name = "ismanager")//It should be is_manager, but... it's not
     boolean isManager;
 
     static int count = 0;
