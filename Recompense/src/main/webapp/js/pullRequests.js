@@ -4,7 +4,6 @@ document.getElementById('populate_pending').addEventListener('click', () => pull
 document.getElementById('populate_accepted').addEventListener('click', () => pullDown('current', 'accepted'));
 document.getElementById('populate_rejected').addEventListener('click', () => pullDown('current', 'rejected'));
 
-
 function pullDown(who, status)
 {
 	clearTable();
