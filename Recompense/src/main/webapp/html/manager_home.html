@@ -3,11 +3,32 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" media="screen" href="..\css\style.css">
+
 </head>
 <body>
-<a href="./manager_view_requests.html">Reimbursement Requests</a>
+<!-- <a href="./manager_view_requests.html">Reimbursement Requests</a>
 <a href="./manager_profiles.html">Employee Profiles</a>
 <a href="./employee_new.html">New Employee</a>
-<a href="./update_profile.html">Update Profile</a>
+<a href="./update_profile.html">Update Profile</a> -->
+
+<div class="grid-container">
+    <div class="grid-item">
+        <a href="./manager_view_requests.html">Reimbursement Requests</a>
+    </div>
+    <div class="grid-item">
+        <a href="./manager_profiles.html">Employee Profiles</a>
+    </div>
+    <div class="grid-item">
+        <a href="./employee_new.html">New Employee</a>
+    </div>
+    <div class="grid-item">
+        <a href="./update_profile.html">Update Profile</a>
+    </div>
+    <div style="display:none" id="high" class="grid-item">
+      <a routerLink="/high-inventory">All Inventories</a>
+  </div>
+    
+</div>
 </body>
 </html>
